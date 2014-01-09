@@ -6,7 +6,7 @@
 
 /** Authors:
  * 	Jason Lo, jalo
- * 	Patrick Traynor, <patrick's username>
+ * 	Patrick Traynor, ptraynor
  */
 
 /** This class template defines a node type for the BST container.
