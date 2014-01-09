@@ -7,7 +7,7 @@
 
 /** Authors:
  * 	Jason Lo, jalo
- * 	Patrick Traynor, <patrick's username>
+ * 	Patrick Traynor, ptraynor
  */
 
 template<typename Data>
