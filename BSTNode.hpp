@@ -5,8 +5,8 @@
 #include <iomanip>
 
 /** Authors:
- * 	Jason Lo, jalo
- * 	Patrick Traynor, ptraynor
+ *  Jason Lo, jalo
+ *  Patrick Traynor, ptraynor
  */
 
 /** This class template defines a node type for the BST container.
@@ -60,10 +60,8 @@ public:
     BSTNode<Data> * travParent = parent;
     BSTNode<Data> * travChild = this;
 
-    while (travParent != nullptr)
-    {
-      if ((travParent->left) == travChild)
-      {
+    while (travParent != nullptr) {
+      if ((travParent->left) == travChild) {
         return travChild;
       }
 
