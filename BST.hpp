@@ -71,6 +71,14 @@ public:
    */
   void clear() {
 
+    // starting with the root node, for each node:
+    // fist clear the left child, then the right child,
+    // and finally the node itself.
+
+    // "clearing" a node means setting its left, right, and parent
+    // pointers to null.
+
+    root.clearSelf();
   }
 
   /** Return true if the BST is empty, else false.
@@ -100,6 +108,22 @@ public:
   iterator end() const {
     return typename BST<Data>::iterator(nullptr);
   }
+
+private:
+
+  /** Helper function for clear().
+   */
+  void clearSelf() {
+
+    if (left != nullptr) clearSelf(left);
+    left = nullptr;
+
+    if (right != nullptr) clearSelf(right);
+    right = nullptr;
+
+    parent = nullptr;
+  }
+
 
 }; // class BST
 
