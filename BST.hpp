@@ -92,7 +92,7 @@ public:
       first = first->left;
     }
 
-    return typename BST<Data>::iterator(nullptr);
+    return typename BST<Data>::iterator(first);
   }
 
   /** Return an iterator pointing past the last item in the BST.
