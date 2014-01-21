@@ -83,15 +83,11 @@ public:
    *  leaving this BST with a size of 0.
    */
   void clear() {
+    
+    // "clearing" a node first clears its left and right children,
+    // then deletes itself.
 
-    // starting with the root node, for each node:
-    // fist clear the left child, then the right child,
-    // and finally the node itself.
-
-    // "clearing" a node means setting its left, right, and parent
-    // pointers to null.
-
-    root.clearSelf();
+    clearNode(root);
   }
 
   /** Return true if the BST is empty, else false.
@@ -125,15 +121,13 @@ private:
 
   /** Helper function for clear().
    */
-  void clearSelf() {
+  void clearNode(BSTNode<Data> * node) {
 
-    if (left != nullptr) clearSelf(left);
-    left = nullptr;
+    if (node->left != nullptr) clearNode(node->left);
 
-    if (right != nullptr) clearSelf(right);
-    right = nullptr;
+    if (node->right != nullptr) clearNode(node->right);
 
-    parent = nullptr;
+    delete node;
   }
 
 
