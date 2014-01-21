@@ -57,7 +57,20 @@ public:
    *  iterator if the item is not in the BST.
    */ // TODO
   iterator find(const Data& item) const {
+    BSTNode<Data> * curr = root;
 
+    while (curr != nullptr) {
+      // if we're in the right place, stop searching
+      // if our current node is too low, search the right tree
+      // if it's too high, search the left tree
+      if (curr->data == item) break;
+      else if (curr->data < item) curr = curr->right;
+      else curr = curr->left;
+    }
+
+    // if we found a matching node, curr will be pointing to it
+    // else curr will be `nullptr`
+    return typename BST<Data>::iterator(curr);
   }
   
   /** Return the number of items currently in the BST.
@@ -87,8 +100,7 @@ public:
 
     BSTNode<Data> * first = root;
 
-    while (first != nullptr)
-    {
+    while (first != nullptr) {
       first = first->left;
     }
 
