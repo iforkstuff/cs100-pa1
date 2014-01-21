@@ -23,8 +23,9 @@ private:
   /** Constructor.  Use the argument to initialize a given BSTNode
    *  in this BSTIterator.
    *  Note: this constructor is private; but friend classes can access.
-   */ // TODO
+   */
   BSTIterator(BSTNode<Data> * curr) {
+    this->curr = curr;
   }
 
 public:
