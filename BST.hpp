@@ -115,7 +115,7 @@ private:
 
     if (node->right != nullptr) clearNode(node->right);
 
-    delete *node;
+    delete node;
   }
 
 
