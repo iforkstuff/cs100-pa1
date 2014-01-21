@@ -57,7 +57,7 @@ public:
     // if I don't have a right child, then my successor is the
     // nearest ancestor of which i am a left child of,
     // which very well may be my parent
-    if (parent == null) return nullptr;
+    if (parent == nullptr) return nullptr;
 
     if (parent->left == this) return parent;
     

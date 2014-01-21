@@ -54,6 +54,18 @@ public:
     BSTNode<Data> * curr = root;
     BSTNode<Data> * ins = nullptr;
 
+    if (curr == nullptr)
+    {
+      // nothing in the tree, let's set root!
+      ins = new BSTNode<Data>(item);
+      root = ins;
+
+      inserted = true;
+
+      // everything else will be skipped over because
+      // we set ins
+    }
+
     while (ins == nullptr) {
       if (curr->data < item) {
         // the current node is smaller than the item, so move to right tree
@@ -162,7 +174,7 @@ public:
 
     BSTNode<Data> * first = root;
 
-    while (first != nullptr) {
+    while (first != nullptr && (first->left) != nullptr) {
       first = first->left;
     }
 
