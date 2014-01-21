@@ -43,7 +43,7 @@ public:
   BSTNode<Data> * successor() const {
     // if I have right child, 
     // either it or its leftmost descendent is the successor
-    if (right != nullptr)     {
+    if (right != nullptr) {
       BSTNode<Data> * leftmost = right;
 
       while ((leftmost->left) != nullptr) {
