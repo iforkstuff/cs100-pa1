@@ -35,9 +35,9 @@ public:
   /** Default destructor.
    *  It is virtual, to allow appropriate destruction of subclass objects.
    *  Delete every node in this BST.
-   */ // TODO
+   */
   virtual ~BST() {
-    
+    clear();
   }
 
   /** Insert a Data item in the BST.
@@ -61,28 +61,38 @@ public:
   }
   
   /** Return the number of items currently in the BST.
-   */ // TODO
+   */
   unsigned int size() const {
-
+    return isize;
   }
 
   /** Remove all elements from this BST, and destroy them,
    *  leaving this BST with a size of 0.
-   */ // TODO
+   */
   void clear() {
 
   }
 
   /** Return true if the BST is empty, else false.
-   */ // TODO
+   */
   bool empty() const {
-
+    return isize == 0;
   }
 
   /** Return an iterator pointing to the first item in the BST.
-   */ // TODO
+   */
   iterator begin() const {
+    // the first node of an in-order traversal is the leftmost
+    // descendant
 
+    BSTNode<Data> * first = root;
+
+    while (first != nullptr)
+    {
+      first = first->left;
+    }
+
+    return typename BST<Data>::iterator(first);
   }
 
   /** Return an iterator pointing past the last item in the BST.
