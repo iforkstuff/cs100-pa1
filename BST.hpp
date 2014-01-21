@@ -49,7 +49,59 @@ public:
    *  equivalent element already existed.
    */ // TODO
   virtual std::pair<iterator,bool> insert(const Data& item) {
+    bool inserted = false;
 
+    BSTNode<Data> * curr = root;
+    BSTNode<Data> * ins = nullptr;
+
+    while (ins == nullptr) {
+      if (curr->data < item) {
+        // the current node is smaller than the item, so move to right tree
+        
+        // is there a right tree to move to?
+        if (curr->right != nullptr) {
+          // yes, so let's shift there and try again
+          curr = curr->right;
+        }
+        else {
+          // no, so let's create a new node
+          ins = new BSTNode<Data>(item);
+          ins->parent = curr;
+          
+          // insert it into the tree
+          curr->right = ins;
+
+          // and mark `inserted`
+          inserted = true;
+        }
+      }
+      else if (curr->data > item) {
+        // the current node is bigger than the item, so move to left tree
+        
+        // the rest of the algorithm is the same as right, just s/right/left/g
+        if (curr->left != nullptr) {
+          curr = curr->left;
+        }
+        else {
+          ins = new BSTNode<Data>(item);
+          ins->parent = curr;
+
+          curr->left = ins;
+
+          inserted = true;
+        }
+      }
+      else {
+        // the data already exists in the tree
+        ins = curr;
+      }
+    }
+
+    if (inserted) ++isize;
+
+    std::pair<iterator,bool> ret(typename BST<Data>::iterator(ins), inserted);
+
+    return ret;
   }
 
   /** Find a Data item in the BST.
@@ -60,12 +112,12 @@ public:
     BSTNode<Data> * curr = root;
 
     while (curr != nullptr) {
-      // if we're in the right place, stop searching
       // if our current node is too low, search the right tree
       // if it's too high, search the left tree
-      if (curr->data == item) break;
-      else if (curr->data < item) curr = curr->right;
-      else curr = curr->left;
+      // otherwise we found it
+      if (curr->data < item) curr = curr->right;
+      else if (curr->data > item) curr = curr->left;
+      else break;
     }
 
     // if we found a matching node, curr will be pointing to it
