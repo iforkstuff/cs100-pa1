@@ -44,7 +44,7 @@ public:
     // if I have right child, 
     // either it or its leftmost descendent is the successor
     if (right != nullptr)     {
-      const BSTNode<Data> * leftmost = right;
+      BSTNode<Data> * leftmost = right;
 
       while ((leftmost->left) != nullptr) {
         // descend until we don't have any more leftmost children
@@ -57,12 +57,16 @@ public:
     // if I don't have a right child, then my successor is the
     // nearest ancestor of which i am a left child of,
     // which very well may be my parent
-    const BSTNode<Data> * travParent = parent;
-    const BSTNode<Data> * travChild = this;
+    if (parent == null) return nullptr;
+
+    if (parent->left == this) return parent;
+    
+    BSTNode<Data> * travParent = parent->parent;
+    BSTNode<Data> * travChild = parent;
 
     while (travParent != nullptr) {
       if ((travParent->left) == travChild) {
-        return travChild;
+        return travParent;
       }
 
       travChild = travParent;
