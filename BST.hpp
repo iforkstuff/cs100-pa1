@@ -55,11 +55,7 @@ public:
     BSTNode<Data> * ins = nullptr;
 
     while (ins == nullptr) {
-      if (curr->data == item) {
-        // the data already exists in the tree
-        ins = curr;
-      }
-      else if (curr->data < item) {
+      if (curr->data < item) {
         // the current node is smaller than the item, so move to right tree
         
         // is there a right tree to move to?
@@ -79,7 +75,7 @@ public:
           inserted = true;
         }
       }
-      else {
+      else if (curr->data > item) {
         // the current node is bigger than the item, so move to left tree
         
         // the rest of the algorithm is the same as right, just s/right/left/g
@@ -94,6 +90,10 @@ public:
 
           inserted = true;
         }
+      }
+      else {
+        // the data already exists in the tree
+        ins = curr;
       }
     }
 
@@ -112,12 +112,12 @@ public:
     BSTNode<Data> * curr = root;
 
     while (curr != nullptr) {
-      // if we're in the right place, stop searching
       // if our current node is too low, search the right tree
       // if it's too high, search the left tree
-      if (curr->data == item) break;
-      else if (curr->data < item) curr = curr->right;
-      else curr = curr->left;
+      // otherwise we found it
+      if (curr->data < item) curr = curr->right;
+      else if (curr->data > item) curr = curr->left;
+      else break;
     }
 
     // if we found a matching node, curr will be pointing to it
