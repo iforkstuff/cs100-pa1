@@ -139,7 +139,13 @@ public:
     // "clearing" a node first clears its left and right children,
     // then deletes itself.
 
+    if (root == nullptr) return;
+
     clearNode(root);
+
+    root = nullptr;
+
+    isize = 0;
   }
 
   /** Return true if the BST is empty, else false.
