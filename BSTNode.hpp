@@ -5,8 +5,8 @@
 #include <iomanip>
 
 /** Authors:
- * 	Jason Lo, jalo
- * 	Patrick Traynor, ptraynor
+ *  Jason Lo, jalo
+ *  Patrick Traynor, ptraynor
  */
 
 /** This class template defines a node type for the BST container.
@@ -39,9 +39,42 @@ public:
    *  POSTCONDITION:  the BST is unchanged.
    *  RETURNS: the BSTNode that is the inorder successor of this BSTNode,
    *  or nullptr if there is none.
-   */ // TODO
+   */
   BSTNode<Data> * successor() const {
+    // if I have right child, 
+    // either it or its leftmost descendent is the successor
+    if (right != nullptr)     {
+      const BSTNode<Data> * leftmost = right;
 
+      while ((leftmost->left) != nullptr) {
+        // descend until we don't have any more leftmost children
+        leftmost = leftmost->left;
+      }
+
+      return leftmost;
+    }
+
+    // if I don't have a right child, then my successor is the
+    // nearest ancestor of which i am a left child of,
+    // which very well may be my parent
+    const BSTNode<Data> * travParent = parent;
+    const BSTNode<Data> * travChild = this;
+
+    while (travParent != nullptr) {
+      if ((travParent->left) == travChild) {
+        return travChild;
+      }
+
+      travChild = travParent;
+      travParent = travParent->parent;
+    }
+
+    // one of two things are true:
+    // * i am the only node in the tree
+    // * i and all of my parents are right-children, and therefore
+    //   i am the last node of an in-order traversal of this tree
+    
+    return nullptr;
   }
 
 }; // class BSTNode
