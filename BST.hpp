@@ -174,7 +174,7 @@ public:
 
     BSTNode<Data> * first = root;
 
-    while (first != nullptr) {
+    while (first != nullptr && (first->left) != nullptr) {
       first = first->left;
     }
 
