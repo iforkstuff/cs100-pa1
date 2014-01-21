@@ -61,12 +61,18 @@ public:
     return before;
   }
 
-  /** Equality test operator. */ // TODO
+  /** Equality test operator.
+   *  Just test if the two curr pointers point to the same BSTNode.
+   */
   bool operator==(BSTIterator<Data> const & other) const {
+    return other->curr == curr;
   }
 
-  /** Inequality test operator. */ // TODO
+  /** Inequality test operator.
+   *  Just use the equality test defined above. 
+   */
   bool operator!=(BSTIterator<Data> const & other) const {
+    return !(this == other);
   }
 
 }; // class BSTIterator
