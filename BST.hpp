@@ -49,7 +49,59 @@ public:
    *  equivalent element already existed.
    */ // TODO
   virtual std::pair<iterator,bool> insert(const Data& item) {
+    bool inserted = false;
 
+    BSTNode<Data> * curr = root;
+    BSTNode<Data> * ins = nullptr;
+
+    while (ins == nullptr) {
+      if (curr->data == item) {
+        // the data already exists in the tree
+        ins = curr;
+      }
+      else if (curr->data < item) {
+        // the current node is smaller than the item, so move to right tree
+        
+        // is there a right tree to move to?
+        if (curr->right != nullptr) {
+          // yes, so let's shift there and try again
+          curr = curr->right;
+        }
+        else {
+          // no, so let's create a new node
+          ins = new BSTNode<Data>(item);
+          ins->parent = curr;
+          
+          // insert it into the tree
+          curr->right = ins;
+
+          // and mark `inserted`
+          inserted = true;
+        }
+      }
+      else {
+        // the current node is bigger than the item, so move to left tree
+        
+        // the rest of the algorithm is the same as right, just s/right/left/g
+        if (curr->left != nullptr) {
+          curr = curr->left;
+        }
+        else {
+          ins = new BSTNode<Data>(item);
+          ins->parent = curr;
+
+          curr->left = ins;
+
+          inserted = true;
+        }
+      }
+    }
+
+    if (inserted) ++isize;
+
+    std::pair<iterator,bool> ret(typename BST<Data>::iterator(ins), inserted);
+
+    return ret;
   }
 
   /** Find a Data item in the BST.
